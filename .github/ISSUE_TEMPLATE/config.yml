@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Microsoft Q&A
+    url: https://learn.microsoft.com/en-us/answers/tags/191/sql-server
+    about: Use Microsoft Q&A to ask and answer questions about Microsoft SQL.

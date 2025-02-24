@@ -1,0 +1,17 @@
+services:
+  dev:
+    image: mcr.microsoft.com/devcontainers/go:1.23
+    command: sleep infinity
+    volumes:
+      - ../../samples/go:/workspace
+    environment:
+      - SQL_CREDENTIAL=Server=sql,1433;User Id=sa;Password=P@ssw.rd;TrustServerCertificate=True;Encrypt=True;
+    depends_on:
+      - sql
+  sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=P@ssw.rd
+    expose:
+      - 1433

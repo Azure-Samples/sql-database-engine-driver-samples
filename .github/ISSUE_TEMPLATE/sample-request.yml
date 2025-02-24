@@ -1,0 +1,19 @@
+name: 🎫 Sample request
+description: Suggest a new sample for this repository.
+title: "[NEW] "
+labels: ["new-sample"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to request new samples.
+        
+        > [!IMPORTANT]
+        > These requests will be reviewed and prioritized.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Provide some context here on the functionality you would like to see in the proposed sample.
+    validations:
+      required: true

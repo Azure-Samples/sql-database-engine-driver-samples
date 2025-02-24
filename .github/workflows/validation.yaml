@@ -1,0 +1,59 @@
+name: Validate samples
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+jobs:
+  validate-go:
+    name: Validate Go samples
+    runs-on: ubuntu-latest
+    container: golang:1.23
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check Go version
+        run: |
+          go version
+      - name: Validate build
+        working-directory: samples/go
+        run: |
+          for dir in $(find samples/go -type d); do
+            if [ -f "$dir/go.mod" ]; then
+              (cd "$dir" && go build)
+            fi
+          done
+      - name: Validate format (lint)
+        working-directory: samples/go
+        run: |
+          for dir in $(find samples/go -type d); do
+            if [ -f "$dir/go.mod" ]; then
+              (cd "$dir" && go vet)
+            fi
+          done
+      - name: Validate build
+        working-directory: samples/go
+        run: |
+          for dir in $(find samples/go -type d); do
+            if [ -f "$dir/go.mod" ]; then
+              (cd "$dir" && go build)
+            fi
+          done
+  validate-dotnet:
+    name: Validate .NET samples
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:9.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check .NET SDK versions
+        run: |
+          dotnet --list-sdks
+      - name: Validate build
+        working-directory: samples/dotnet
+        run: |
+          dotnet build --configuration debug
+      - name: Validate format
+        working-directory: samples/dotnet
+        run: |
+          dotnet format --severity info --verify-no-changes
