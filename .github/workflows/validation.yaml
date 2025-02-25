@@ -17,26 +17,22 @@ jobs:
           go version
       - name: Validate build
         working-directory: samples/go
+        env:
+          GOFLAGS: -buildvcs=false
         run: |
           for dir in $(find -type d); do
             if [ -f "$dir/go.mod" ]; then
               (cd "$dir" && go build)
             fi
           done
-      - name: Validate format (lint)
+      - name: Validate format
         working-directory: samples/go
+        env:
+          GOFLAGS: -buildvcs=false
         run: |
           for dir in $(find -type d); do
             if [ -f "$dir/go.mod" ]; then
               (cd "$dir" && go vet)
-            fi
-          done
-      - name: Validate build
-        working-directory: samples/go
-        run: |
-          for dir in $(find samples/go -type d); do
-            if [ -f "$dir/go.mod" ]; then
-              (cd "$dir" && go build)
             fi
           done
   validate-dotnet:
