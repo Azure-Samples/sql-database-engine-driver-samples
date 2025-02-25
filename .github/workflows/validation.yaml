@@ -18,7 +18,7 @@ jobs:
       - name: Validate build
         working-directory: samples/go
         run: |
-          for dir in $(find samples/go -type d); do
+          for dir in $(find -type d); do
             if [ -f "$dir/go.mod" ]; then
               (cd "$dir" && go build)
             fi
@@ -26,7 +26,7 @@ jobs:
       - name: Validate format (lint)
         working-directory: samples/go
         run: |
-          for dir in $(find samples/go -type d); do
+          for dir in $(find -type d); do
             if [ -f "$dir/go.mod" ]; then
               (cd "$dir" && go vet)
             fi
