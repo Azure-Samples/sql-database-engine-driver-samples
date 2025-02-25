@@ -41,10 +41,10 @@ This sample uses the .NET driver for SQL to connect to a database engine and per
     dotnet user-secrets set "SQL_CREDENTIAL" "<your-sql-connection-string>"
     ```
 
-1. Run this sample using `dotnet watch run`.
+1. Run this sample using `dotnet run`.
 
     ```shell
-    dotnet watch run
+    dotnet run
     ```
 
 1. Observe the output.
